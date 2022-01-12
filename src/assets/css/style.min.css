@@ -1,0 +1,77 @@
+#wrapper{
+	background: url('../images/shape_6.png') center top transparent;
+	min-height: 900px;
+}
+.navbar-header{width: 100%;}
+.navbar-header{padding: 15px 0;}
+.navbar-header .logo{width: 20%;display: inline;float: left;}
+.navbar-header .menu{width: 50%;display: inline;float: left;}
+.navbar-header .connect_wallet{width: 30%;display: inline;float: left;}
+.menu ul li{float: left;display: inline;list-style: none;padding: 17px 10px;}
+.menu ul li a{color: #717988;font-size: 20px;}
+.connect_wallet p{
+	float: right;
+	padding: 17px 10px;
+}
+.connect_wallet p a{
+	font-size: 14px;
+	align-items: center;
+	border: 1px solid #d9e0ea;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.25rem;
+	transition: all .1s ease-in-out;
+    background-color: #ddd;
+	font-weight: bold;
+	color: #333;
+}
+.connect_wallet p a:hover{text-decoration: none;}
+#about{padding: 30px 0;margin-top: 40px;}
+.about_title{width: 63.33333333%;float: left;padding:0 20px;}
+.about_image{
+	width: 36.66666667%;
+	float: right;
+}
+.ps--hero__title {
+    color: #e2e4e9;
+    margin: 0;
+    font-size: 66px;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    color: #717cd6;
+}
+.ps--hero__subtitle {
+	font-family: inherit;
+    color: #5c5e6c;
+    margin-bottom: 0.5rem;
+	font-size: 2.375rem;
+    line-height: 3.125rem;
+}
+.sc_button{
+    font-size: 1.2em;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 24px;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0.5px;
+	color: #ffffff !important;
+    background-color: #70c599 !important;
+	box-sizing: border-box;
+    white-space: nowrap;
+    padding: 1.7em 3.1em;
+    letter-spacing: 0;
+    height: auto;
+    border-width: 0 !important;
+    border-radius: 1em;
+	margin-top: 30px;
+    cursor: pointer;
+}
+.about_title .botton{margin-top: 60px;clear: both;min-height: 70px;}
+.project_image img{width: 100%;height: 225px;}
+#clear{clear: both;}
+.project_title{padding: 15px;}
+
+#c-game-canvas {
+    background: url('../images/backgroundgame.png') center top transparent;
+    cursor: pointer;
+} 

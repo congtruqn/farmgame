@@ -1,0 +1,23 @@
+steps:
+# build
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', 
+  '--tag=gcr.io/$PROJECT_ID/components-nginx:$BRANCH_NAME', 
+  "."]
+# push
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/components-nginx:$BRANCH_NAME']
+
+# deploy
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 
+  '$BRANCH_NAME-dot-components', 
+  '--image=gcr.io/$PROJECT_ID/components-nginx:$BRANCH_NAME', 
+  '--port=80', '--timeout=900',
+  '--allow-unauthenticated', '--region=asia-northeast1']
+
+# policy
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'services', 'add-iam-policy-binding',  
+  '--region=asia-northeast1', '$BRANCH_NAME-dot-components', '--member=allUsers', '--role=roles/run.invoker']
+timeout: "1600s"
