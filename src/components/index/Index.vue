@@ -22,36 +22,36 @@ export default {
                 x:0,
                 y:0
             },
-            points:[]
+            points:[],
+            plots:[
+                {
+                    x:290,
+                    y:220,
+                },
+                {
+                    x:190,
+                    y:260,
+                }
+            ]
         }
     },
     methods: {
         
         initGame(){
-
             this.canvas = document.getElementById('c-game-canvas');
             this.ctx = this.canvas.getContext('2d');
-                       
-            
-            this.playerLeft = new Image();
-            this.playerLeft.src = 'https://giayfutsal.com.vn/uploads/pot.png';
-            this.playerLeft.onload = () => this.ctx.drawImage(this.playerLeft,290,220);
-            
-
-            this.ctx.fillStyle = 'blue';
-            this.ctx.beginPath();
-            this.ctx.arc(210,260+60, 70, 0, Math.PI * 40);
-            this.ctx.fill();
-            //this.ctx.stroke();
-            this.playerLeft = new Image();
-            this.playerLeft.src = 'https://giayfutsal.com.vn/uploads/pot.png';
-            this.playerLeft.onload = () => this.ctx.drawImage(this.playerLeft,210,260);
-            
-            //console.log(this.playerLeft)
-            //this.playerLeft = new Image();
-            //this.playerLeft.src = 'https://giayfutsal.com.vn/uploads/pot.png';
-            //this.ctx.drawImage(this.playerLeft,130,300);
-            //requestAnimationFrame(this.initGame);
+            for(let i = 0; i< this.plots.length;i++)
+            {
+                //this.ctx.fillStyle = 'blue';
+                //this.ctx.beginPath();
+                //this.ctx.arc(this.plots[i].x+68,this.plots[i].y+34, 40, 0, Math.PI * 40);
+                //this.ctx.fill();
+                //this.ctx.stroke();
+                this.playerLeft = new Image();
+                this.playerLeft.src = 'https://giayfutsal.com.vn/uploads/pot.png';
+                this.playerLeft.onload = () => this.ctx.drawImage(this.playerLeft,this.plots[i].x,this.plots[i].y);
+            }
+            this.ctx.restore();
         },
         draw: function () {
             var canvas = this.$data.canvas,
@@ -61,20 +61,23 @@ export default {
             // draw circles
             this.points.forEach(function (pt) {
                 ctx.beginPath();
-                ctx.arc(pt.x, pt.y, 20, 0, Math.PI * 2);
+                ctx.arc(pt.x, pt.y, 35, 0, Math.PI * 2);
                 ctx.fill();
             });
         },
         click: function (e) {
-            var bx = e.target.getBoundingClientRect();
-            this.points.push({
-                x: (e.touches ? e.touches[0].x : e.clientX) - bx.left,
-                y: (e.touches ? e.touches[0].y : e.clientY) - bx.top
-            });
-            if (this.points.length > 10) {
-                this.points = this.$data.points.slice(1, 11);
+            console.log(e)
+            for(let i = 0; i< this.plots.length;i++)
+            {
+                let dx = e.layerX - (this.plots[i].x+68);
+                let dy = e.layerY - (this.plots[i].y+24);
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if(distance<40){
+                    this.playerLeft = new Image();
+                    this.playerLeft.src = 'https://giayfutsal.com.vn/uploads/pot1.png';
+                    this.playerLeft.onload = () => this.ctx.drawImage(this.playerLeft,this.plots[i].x,this.plots[i].y);
+                }
             }
-            this.draw();
         },
     },
     created: function() {

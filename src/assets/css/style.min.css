@@ -73,5 +73,8 @@
 
 #c-game-canvas {
     background: url('../images/backgroundgame.png') center top transparent;
-    cursor: pointer;
-} 
+    
+}
+canvas{
+    cursor:url('../images/hand.png')
+}
