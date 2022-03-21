@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+
+  brostools-api-person:
+    build:
+      context: ""
+      dockerfile: ./services/api-person/Dockerfile
+    image: brostools-api-person
+    container_name: brostools-api-person
+    restart: always
+    hostname: brostools-api-person
+    networks:
+      - brostools-api-person-network
+    ports:
+      - "8080:8080"
+    environment:
+      - NGINX_PORT=8080
+      - MYSQL_DSN_BROSTOOLS_API_PERSON=$_MYSQL_DSN_BROSTOOLS_API_PERSON
+      - MYSQL_USER_BROSTOOLS_API_PERSON=$-MYSQL_USER_BROSTOOLS_API_PERSON
+      - MYSQL_PASSWORD_BROSTOOLS_API_PERSON=$_MYSQL_PASSWORD_BROSTOOLS_API_PERSON
+      - API_USE_SECRET_BROSTOOLS_API_JWT=$_API_USE_SECRET_BROSTOOLS_API_JWT
+      - RUNTIME_ENV=local
+      - API_RUN_TYPE=dev
+    volumes:
+      - ./services/api-person:/go/src/brostools-api-person
+
+networks:
+  brostools-api-person-network:
+    driver: bridge

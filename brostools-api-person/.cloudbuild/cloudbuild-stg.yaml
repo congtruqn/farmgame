@@ -1,0 +1,25 @@
+steps:
+- name: 'bash'
+  args: ["mv", "-f", "services/api-person/config/stg/app.yaml", "services/api-person"]
+- name: "gcr.io/cloud-builders/gcloud"
+  entrypoint: /bin/sh
+  args:
+  - "-c"
+  - |
+    cat << EOF > services/api-person/secret.yaml
+    env_variables:
+      MYSQL_DSN_BROSTOOLS_API_PERSON: $_MYSQL_DSN
+      MYSQL_USER_BROSTOOLS_API_PERSON: $_MYSQL_USER
+      MYSQL_PASSWORD_BROSTOOLS_API_PERSON: $_MYSQL_PASSWORD
+      API_USE_SECRET_BROSTOOLS_API_JWT: $_API_USE_SECRET_BROSTOOLS_API_JWT
+      POSTGRES_DSN_BRANTECT_API_PERSON: $_PGSQL_DSN
+      POSTGRES_USER_BRANTECT_API_PERSON: $_PGSQL_USER
+      POSTGRES_PASSWORD_BRANTECT_API_PERSON: $_PGSQL_PASSWORD
+      RUNTIME_ENV: gae
+      API_RUN_TYPE: stg
+      POSTGRES_DBNAME_BRANTECT_API_PERSON: brantect
+    EOF
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy","services/api-person/app.yaml","--version=$BRANCH_NAME","--no-promote","--no-cache","--project=brights-bros"]
+
+timeout: "1600s"

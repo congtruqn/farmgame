@@ -1,0 +1,44 @@
+INSERT INTO
+mst_person (
+    client_cd,
+	dept_cd,
+	person_cd,
+	executive,
+	person_nm,
+	person_name_kana,
+	zip,
+	address,
+	tel,
+	fax,
+	email,
+	mobile,
+	remarks,
+	search_person_nm,
+	type,
+	idno,
+    inp_date,
+    inp_user,
+    delete_flg
+)
+VALUES
+(
+    $1,
+    $2,
+    $3,
+    $4,
+    $5,
+    $6,
+    $7,
+    $8,
+    $9,
+    $10,
+    $11,
+    $12,
+    $13,
+    $14,
+    $15,
+    $16,
+    NOW(),
+    $17,
+    $18
+)

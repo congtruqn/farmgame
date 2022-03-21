@@ -1,0 +1,17 @@
+runtime: go115
+service: api-person
+
+handlers:
+- url: /.*
+  script: auto
+
+nobuild_files:
+  - gopath/src
+
+automatic_scaling:
+  min_idle_instances: 1
+  max_idle_instances: 1
+  max_pending_latency: 2000ms
+
+includes:
+- secret.yaml
