@@ -1,0 +1,78 @@
+steps:
+
+########################
+# op-rcvmapping
+########################
+
+- name: 'bash'
+  args: ["mv", "-f", ".cloudbuild/conf/op-rcvmapping/stg/config.js", "services/op-rcvmapping/html/op/rcvmapping/js/"]
+
+
+# build
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', 
+  '--tag=gcr.io/$PROJECT_ID/op-rcvmapping:$BRANCH_NAME', 
+  '--file=services/op-rcvmapping/Dockerfile', "."]
+
+# push
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/op-rcvmapping:$BRANCH_NAME']
+
+# deploy
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', '$BRANCH_NAME-dot-op-rcvmapping-dot-brights-bros',  '--command=', '--project=brights-bros', '--image=gcr.io/$PROJECT_ID/op-rcvmapping:$BRANCH_NAME', '--memory=256M', '--port=8000', '--cpu=1', '--timeout=900', '--platform=managed', '--allow-unauthenticated', '--region=asia-northeast1']
+
+# policy
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'services', 'add-iam-policy-binding', '--project=brights-bros','--platform=managed', '--region=asia-northeast1', '$BRANCH_NAME-dot-op-rcvmapping-dot-brights-bros', '--member=allUsers', '--role=roles/run.invoker']
+
+########################
+# op-rcvmapping-nginx
+########################
+
+- name: 'bash'
+  args: ["mv", "-f", ".cloudbuild/conf/op-rcvmapping-nginx/stg/op-rcvmapping-nginx.conf", "services/op-rcvmapping-nginx/conf/"]
+- name: 'bash'
+  args: ["mv", "-f", ".cloudbuild/conf/op-rcvmapping-nginx/stg/op-rcvmapping.txt", "services/op-rcvmapping-nginx/conf/"]
+- name: "gcr.io/cloud-builders/gcloud"
+  entrypoint: /bin/sh
+  args:
+  - "-c"
+  - |
+    cat << EOF > services/op-rcvmapping-nginx/conf/op-rcvmapping.txt
+    proxy_pass https://$BRANCH_NAME-dot-op-rcvmapping-dot-brights-bros-uwt3euhkna-an.a.run.app;
+    EOF
+- name: "gcr.io/cloud-builders/gcloud"
+  entrypoint: /bin/sh
+  args:
+  - "-c"
+  - |
+    cat << EOF > services/op-rcvmapping-nginx/conf/servername.txt
+    server_name $BRANCH_NAME-dot-op-rcvmapping-nginx-dot-brights-bros-uwt3euhkna-an.a.run.app;
+    
+    EOF
+
+# build
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', 
+  '--tag=gcr.io/$PROJECT_ID/op-rcvmapping-nginx:$BRANCH_NAME', 
+  '--file=services/op-rcvmapping-nginx/Dockerfile', "."]
+# push
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/op-rcvmapping-nginx:$BRANCH_NAME']
+
+# deploy
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 
+  '$BRANCH_NAME-dot-op-rcvmapping-nginx-dot-brights-bros', 
+  '--project=brights-bros', 
+  '--image=gcr.io/$PROJECT_ID/op-rcvmapping-nginx:$BRANCH_NAME', 
+  '--memory=256M', '--port=80', '--cpu=1', '--timeout=900', 
+  '--platform=managed', '--allow-unauthenticated', '--region=asia-northeast1']
+
+# policy
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'services', 'add-iam-policy-binding', 
+  '--project=brights-bros','--platform=managed', 
+  '--region=asia-northeast1', '$BRANCH_NAME-dot-op-rcvmapping-nginx-dot-brights-bros', '--member=allUsers', '--role=roles/run.invoker']
+timeout: "1600s"

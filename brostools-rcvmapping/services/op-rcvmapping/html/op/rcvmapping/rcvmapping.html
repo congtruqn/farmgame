@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- metadata -->
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+
+    <!-- external resources -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://unpkg.com/vue-cookies@1.7.4/vue-cookies.js"></script>
+    <script src="https://unpkg.com/vue-i18n@8.26.5/dist/vue-i18n.js"></script>
+    <script src="https://unpkg.com/axios@0.22.0/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://unpkg.com/vue-meta@2.4.0/dist/vue-meta.js"></script>
+    <script src="https://unpkg.com/vuejs-paginate@2.1.0"></script>
+    <!-- vuejs-dialog -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuejs-dialog@1.4.1/dist/vuejs-dialog.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vuejs-dialog@1.4.1/dist/vuejs-dialog.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuejs-dialog@1.4.1/dist/vuejs-dialog-mixin.min.js"></script>
+    <!-- moment js -->
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/vee-validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <!-- boostrap 2.3.2 no longer supported -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="/js/bootstrap.js"></script>
+
+    <!-- global resources -->
+    <link href="/css/sidebar.css" rel="stylesheet">
+    <link href="/css/brostool-extension.css" rel="stylesheet">
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/ico/favicon.png">
+    <!-- <link href="/css/bros3.css" rel="stylesheet"> -->
+
+    <script src="/js/common.js"></script>
+    <script src="/js/000_base/navbar.js"></script>
+    <script src="/js/lib/jquery.livefilter.js"></script>
+</head>
+
+<body class="bros3">
+
+    <!-- vue app -->
+    <div id="app_list" v-if="!load_err" v-show="app_rcvmapping_show" style="display:none;" v-bind:class="_i18n.locale">
+        <x-brostools-header 
+        v-bind:locale="locale"
+        v-bind:bros_session="bros_session" 
+        v-bind:bros_token_inside="bros_token_inside"
+        v-bind:bros_token="bros_token"
+        ref="bros_header"
+        @change-locale="emitChangeLocale"
+        @loaded="v => emitComponentLoad(v)"
+        @initial-load="headerMounted"
+      ></x-brostools-header>
+        <div id="sidebar-fix-width" class="big-screen temp-tag" style="min-height: 1000px; width: 240px; position: absolute; z-index: 2;">
+            <div class="nav-collapse collapse" style="width: 100%; text-align: center; font-size: 30px; min-height: 315px;">
+                <i class="icon-refresh icon-spin loading"></i>
+            </div>
+        </div>
+        <x-brostools-menu
+                v-bind:locale="locale"
+                v-bind:bros_token="bros_token"
+                ref="bros_menu"
+                @loaded="v => emitComponentLoad(v)"
+        ></x-brostools-menu>
+        <div id="content" class="container-fluid">
+            <div class="app_header">
+                <ul>
+                    <li>
+                        <h3>{{ $t("PAGE_TITLE") }}</h3>
+                    </li>
+                </ul>
+            </div>
+            <div class="app_body app_new_form">
+                <form>
+                    <div class="form_control">
+                        <div class="form_control_left">
+                        </div>
+                        <div class="form_control_right">
+                            <input type="radio" id="jack" value="register" v-model="checkedtype" :checked="checkedtype=='register'">
+                            <label for="jack">{{ $t("REGISTER") }}</label>
+                            <input type="radio" id="john" value="remove" v-model="checkedtype" :checked="checkedtype===0">
+                            <label for="john">{{ $t("REMOVE") }}</label>
+                        </div>
+                    </div>
+                    <div class="form_control">
+                        <div class="form_control_left">
+                            <div>
+                                <input type="radio" id="jack" value="rcv" v-model="inputtype" :checked="inputtype=='rcv'">
+                                <label  class="required">{{ $t("RECEIVED_ORDOER_NO") }}</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="john" value="est" v-model="inputtype" :checked="inputtype=='est'">
+                                <label  class="required">{{ $t("ESTIMATIONS_NO") }}</label>
+                            </div>
+
+                        </div>
+                        <div class="form_control_right">
+                            <div class="error_message">
+                                <p>{{ errors.first('rcvordernos') }}</p>
+                            </div>
+                            <textarea
+                                name="rcvordernos"
+                                :data-vv-as="$t('AREA_MAS')"
+                                v-validate="'required'"
+                                type="text"
+                                v-model="rcvordernos"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="if_add_new" v-if="checkedtype=='register'">
+                        <div class="form_control">
+                            <div class="form_control_left">
+                                <label class="required">{{ $t("CLIENT") }}</label>
+                            </div>
+                            <div class="form_control_right">
+                                <div class="error_message">
+                                    <p>{{ errors.first('client_cd') }}</p>
+                                </div>
+                                <input
+                                    name="client_cd"
+                                    :data-vv-as="$t('CLIENT')"
+                                    v-validate="'required|numeric'"
+                                    type="text"
+                                    v-model="client_cd"
+                                    @change="getAddrSetList"
+                                />
+                            </div>
+                        </div>
+                        <div class="form_control">
+                            <div class="form_control_left">
+                                <label  class="required">{{ $t("ADDRESS_SET") }}</label>
+                            </div>
+                            <div class="form_control_right">
+                                <div class="error_message">
+                                    <p>{{ errors.first('addrset_id') }}</p>
+                                </div>
+                                <select
+                                        v-model="addrset_id"
+                                        name="addrset_id"
+                                        :data-vv-as="$t('ADDRESS_SET')"
+                                        v-validate="'required'">
+                                    <option
+                                            v-for="add in address_list"
+                                            :value="add">
+                                        {{ add.addrset_name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form_control">
+                        <div class="form_control_left">
+                        </div>
+                        <div class="form_control_right">
+                            <button type="button" v-on:click="postAddressSet">{{ $t("SAVE") }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <x-brostools-footer ref="bros_footer" @loaded="v => emitComponentLoad(v)"></x-brostools-footer>
+    </div>
+    <div tabindex="0" aria-label="Loading" aria-busy="true" class="vld-overlay is-active is-full-page">
+        <div class="vld-background" style="backdrop-filter: blur(2px)"></div>
+        <div class="vld-icon">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
+    <!-- local resources -->
+    <script type="module" src="/op/rcvmapping/js/rcvmapping.js"></script>
+    <link href="/op/rcvmapping/css/bros3.css" rel="stylesheet" />
+</body>
+
+</html>

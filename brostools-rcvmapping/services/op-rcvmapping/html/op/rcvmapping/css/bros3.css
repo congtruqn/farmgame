@@ -1,0 +1,552 @@
+.bros3 * {
+    font-size:13px;
+}
+.bros3 .jp {
+    font-family: 'Roboto','Helvetica Neue',"Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+.bros3 .app_header * {
+    margin:0;
+    padding:0 0 0 12px;
+    line-height:1.4;
+}
+.bros3 .app_header {
+    margin-bottom: 8px;
+}
+.bros3 .app_header ul, .bros3 .app_header li,
+.bros3 .app_list ul, .bros3 .app_list li {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+.bros3 .app_header ul{
+    display: table;
+}
+.bros3 .app_header li{
+    display: table-cell;
+    vertical-align: middle;
+    padding-right: 12px;
+}
+.bros3 .app_header li:first-child {
+    padding-right: 48px;
+}
+.bros3 h3 {
+    margin-right: 32px;
+    /*    color:#F00;*/
+    font-size:20px;
+    font-weight: normal;
+}
+.bros3 .app_header li a {
+    padding: 8px 16px 8px 14px;
+    border: 1.1px solid #FFF;
+    border-radius: 6px;
+    background-color: #FFF;
+    color: rgb(51, 103, 214);
+}
+.bros3 .app_header li:nth-of-type(2) a:before {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    margin-right: .3em;
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none;
+}
+.bros3 .app_header li:nth-of-type(2) a:before {
+    content: "\f067";
+}
+.bros3 .app_header li a:hover {
+    background-color: #eee;
+    color: rgb(41, 81, 168);
+    text-decoration: none;
+}
+/* page back arrow btn link on header START */
+.bros3 .app_header li.btn_back {
+    padding-right: 4px;
+}
+.bros3 .app_header li.btn_back a {
+    display: block;
+    margin-top: -6px;
+    margin-bottom: -6px;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+}
+.bros3 .app_header li.btn_back a:before {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none;
+    margin-right: 0;
+    content: "\f060";
+    text-decoration: none;
+}
+/* page back arrow btn link on header END */
+
+/*== body ==*/
+/*.bros3 .app_body {*/
+/*    border-top: 1px solid rgb(224, 224, 224);*/
+/*}*/
+.bros3 .app_list .invoice_list_table {
+    padding: 0;
+    width: 100%;
+    height: calc(100vh - 266px);
+    overflow-x: scroll;
+}
+.bros3 .app_list .invoice_list_table table {
+    margin: 0;
+    width: 100%;
+    border-collapse: separate;
+    position: relative;
+}
+.bros3 .app_list .invoice_list_table th,
+.bros3 .app_list .invoice_list_table td {
+    padding: 4px 16px;
+    white-space: nowrap;
+    border-left: 1px solid rgb(224, 224, 224);
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+.bros3 .app_list .invoice_list_table tr td:first-of-type {
+    border-left: none;
+}
+.bros3 .app_list .invoice_list_table th {
+    color: rgba(0, 0, 0, 0.66);
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+    background-color: #f5f5f5;
+    position: sticky;
+    top: 0;
+}
+.bros3 .app_list .invoice_list_table th:first-of-type {
+    font-size: 13px;
+    border-left: none;
+}
+.bros3 .app_list .invoice_list_table tr td {
+    text-align: center;
+}
+.bros3 .app_list .invoice_list_table tr td.amount {
+    text-align: right;
+}
+.bros3 .app_list .invoice_list_table tr td:last-of-type a {
+    display: inline-block;
+    /*padding: 8px 16px 8px 14px;*/
+}
+.bros3 .app_list .invoice_list_table tr td a {
+    display: block;
+    padding: 5px 14px;
+    border-radius: 6px;
+    background-color: #FFF;
+    color: rgb(51, 103, 214);
+}
+.bros3 .app_list .invoice_list_table tr td a:hover {
+    background-color: #eee;
+    color: rgb(41, 81, 168);
+    text-decoration: none;
+}
+.bros3 .app_list .invoice_list_table tr td a:first-of-type {
+    margin-right: 8px;
+}
+.bros3 .app_list .invoice_list_table tr td a.dl_attach {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgb(51, 103, 214);
+    background-color: transparent;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.bros3 .app_list .invoice_list_table tr td a.dl_attach:hover{
+    color: rgb(41, 81, 168);
+}
+/*== pagenate ==*/
+.bros3 .app_paginate::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.bros3 .app_paginate::before {
+    content: "";
+    display: block;
+    clear: both;
+}
+.bros3 .app_paginate {
+    float: right;
+    color: rgba(0, 0, 0, 0.66);
+    display: table;
+}
+.bros3 .app_paginate div, .bros3 .app_paginate p, .bros3 .app_paginate ul {
+    display: table-cell;
+    vertical-align: middle;
+}
+.bros3 .app_paginate div {
+    padding-right: 24px;
+}
+.bros3 .app_paginate div label, .bros3 .app_paginate div select {
+    display: inline-block;
+}
+.bros3 .app_paginate div label {
+    padding-right: 4px;
+}
+.bros3 .app_paginate div select {
+    margin-top: 8px;
+    width: 5em;
+    border: none;
+}
+.bros3 .app_paginate div select:hover {
+    background-color: #eee;;
+}
+.bros3 .app_paginate p {
+    padding-right: 16px;
+}
+.bros3 .app_paginate ul {
+    border-bottom: none;
+}
+.bros3 .app_paginate ul li {
+    display: inline-block;
+    padding: 4px;
+    border: none;
+    text-align: center;
+}
+.bros3 .app_paginate ul li:hover {
+    background-color: #FFF;
+}
+.bros3 .app_paginate ul li a {
+    color: rgb(51, 103, 214);
+    text-decoration: none;
+}
+.bros3 .app_paginate ul li a:hover {
+    color: rgb(41, 81, 168);
+}
+.bros3 .app_paginate ul li.active a {
+    color: rgba(0, 0, 0, 0.66);
+}
+.bros3 .app_paginate ul li:first-child,
+.bros3 .app_paginate ul li:last-child {
+    height: 24px;
+    line-height: 24px;
+    padding: 0px;
+    width: 24px;
+}
+/* page back arrow btn link on header START */
+.bros3 .app_header li.btn_back {
+    padding-right: 4px;
+}
+.bros3 .app_header li.btn_back a {
+    display: block;
+    margin-top: -6px;
+    margin-bottom: -6px;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+}
+.bros3 .app_header li.btn_back a:before {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none;
+    margin-right: 0;
+    content: "\f060";
+    text-decoration: none;
+}
+/* page back arrow btn link on header END */
+/*== body ==*/
+.bros3 .app_body {
+    border-top: 1px solid rgb(224, 224, 224);
+}
+.bros3 .app_list li {
+    border-bottom: none;
+    /*padding: 4px 16px;*/
+}
+.bros3 .app_list li:hover {
+    /*cursor: pointer;*/
+    /*background-color: rgba(0, 0, 0, 0.04);*/
+}
+/* Create new transfer page's setting START */
+.bros3 .app_new_form {
+    padding-top: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.bros3 .app_new_form form p {
+    display: table;
+    margin-bottom: 12px;
+}
+.bros3 .app_new_form form p:last-of-type {
+    margin-bottom: 16px;
+}
+.bros3 .app_new_form form p span,
+.bros3 .app_new_form form p select,
+.bros3 .app_new_form form p input {
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+    box-sizing: content-box;
+}
+.bros3 .jp .app_new_form form p span {
+    width: 200px;
+}
+.bros3 .en .app_new_form form p span {
+    width: 260px;
+}
+
+.bros3 .app_new_form form .error_message p {
+    margin-bottom: 2px;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+}
+.bros3 .jp .app_new_form form .group_name .error_message p {
+    margin-left: 115px;
+}
+.bros3 .en .app_new_form form .group_name .error_message p {
+    margin-left: 97px;
+}
+.bros3 .app_new_form form .error_message p:empty {
+    height: 0;
+    margin-bottom: 0;
+    display: none;
+}
+.bros3 .app_new_form form {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+}
+.bros3 .app_new_form button {
+    padding: 8px 16px 8px 14px;
+    border: 1.1px solid #eee;
+    border-radius: 6px;
+    background-color: #FFF;
+    color: rgb(51, 103, 214);
+    cursor: pointer;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+.bros3 .app_new_form button:hover {
+    background-color: #eee;
+    color: rgb(41, 81, 168);
+    text-decoration: none;
+}
+.bros3 .app_new_form .btn_create button {
+    padding-left: 48px;
+    padding-right: 48px;
+    border-color: #3367d6;
+    background-color: #3367d6;
+    color: #FFF;
+}
+.bros3 .app_new_form .btn_delete {
+    margin-top: -4px;
+}
+.bros3 .app_new_form .btn_add,
+.bros3 .app_new_form .btn_create {
+    display: inline-block;
+    margin-right: 12px;
+}
+input[type="file"] {
+    display: none !important;
+}
+.bros3 .app_new_form button.file {
+    padding: 4px 16px 4px 14px;
+    border: 1.1px solid #eee;
+    border-radius: 6px;
+    background-color: #FFF;
+    color: rgb(51, 103, 214);
+    cursor: pointer;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+.bros3 .app_new_form button.file:hover {
+    background-color: #eee;
+    color: rgb(41, 81, 168);
+    text-decoration: none;
+}
+.bros3 .app_new_form button.file:before {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    margin-right: .3em;
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none;
+    content: "\f093";
+}
+/* Create new transfer page's setting END */
+.bros3 .app_new_form p a.dl_attach,
+.bros3 .app_new_form div a.dl_attach {
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgb(51, 103, 214);
+    background-color: transparent;
+    display: inline-block;
+    margin-right: 12px;
+    padding: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.bros3 .app_new_form p a.dl_attach:hover,
+.bros3 .app_new_form div a.dl_attach:hover {
+    color: rgb(41, 81, 168);
+}
+.bros3 .app_new_form form div.attachments {
+    display: table;
+    margin-bottom: 12px;
+}
+
+.bros3 .app_new_form form div.attachments span,
+.bros3 .app_new_form form div.attachments ul {
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+    box-sizing: content-box;
+}
+.bros3 .app_new_form form div.attachments ul li {
+    list-style-type: none;
+    margin-bottom: 12px;
+}
+.bros3 .en .app_new_form form div.attachments span {
+    width: 260px;
+    vertical-align: top;
+}
+
+.bros3 .jp .app_new_form form div.attachments span {
+    width: 200px;
+    vertical-align: top;
+}
+.bros3 .app_new_form form div ul li button.delete_att_btn:before {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none;
+    margin-right: .3em;
+    content: "\F014";
+    text-decoration: none;
+}
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    margin: 8px;
+    border: 4px solid currentColor;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #007bff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+.vld-shown {
+    overflow: hidden;
+}
+.vld-overlay {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    align-items: center;
+    display: none;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 9999;
+}
+.vld-overlay.is-active {
+    display: flex;
+}
+.vld-overlay.is-full-page {
+    z-index: 9999;
+    position: fixed;
+}
+.vld-overlay .vld-background {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #fff;
+    opacity: 0.5;
+}
+.vld-overlay .vld-icon, .vld-parent {
+    position: relative;
+}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.form_control .required:after {
+    content:" *";
+    color: #333;
+}
+.dg-content-footer{
+    overflow: hidden !important;
+}
+.dg-btn--cancel{
+    float:right !important;
+    color: #222 !important;
+    background-color: #eee !important;
+}
+.dg-btn--cancel:hover{
+    float:right !important;
+    color: #222 !important;
+    background-color: #ccc !important;
+}
+.dg-btn--ok{
+    color: #fefefe;
+    background-color: #0096D9;
+    margin-right: 5px;
+}
+.dg-btn--ok:hover{
+    color: #fefefe;
+    background-color: #549aaf;
+    margin-right: 5px;
+}
+.form_control{display: block;clear: both;}
+.form_control label{display: inline !important;padding-top: 4px;}
+.form_control_left{float: left;width: 190px;min-height: 30px;}
+.form_control_right{float: left;width: 670px;}
+.form_control_right textarea{width: 500px; height: 150px;}
+input[type="radio"]{margin: 0 !important;}

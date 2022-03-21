@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+
+  brostools-op-rcvmapping-nginx:
+    build:
+      context: ""
+      dockerfile: ./services/op-rcvmapping-nginx/Dockerfile
+    image: brostools-op-rcvmapping-nginx
+    container_name: brostools-op-rcvmapping-nginx
+    restart: always
+    hostname: brostools-op-rcvmapping-nginx
+    networks:
+      - brostools-op-rcvmapping-network
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_PORT=80
+    depends_on:
+      - brostools-op-rcvmapping
+
+  brostools-op-rcvmapping:
+    build:
+      context: ""
+      dockerfile: ./services/op-rcvmapping/Dockerfile
+    image: brostools-op-rcvmapping
+    container_name: brostools-op-rcvmapping
+    restart: always
+    hostname: brostools-op-rcvmapping
+    networks:
+      - brostools-op-rcvmapping-network
+    ports:
+      - "8000:8000"
+    environment:
+      - NGINX_PORT=8080
+    volumes:
+      - ./services/op-rcvmapping/html:/html
+
+networks:
+  brostools-op-rcvmapping-network:
+    driver: bridge

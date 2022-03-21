@@ -1,0 +1,4 @@
+proxy_buffering off;
+resolver 127.0.0.11 valid=10s;
+set $endpoint https://issue-1-dot-op-rcvmapping-dot-brights-bros-uwt3euhkna-an.a.run.app;
+proxy_pass  $endpoint;
